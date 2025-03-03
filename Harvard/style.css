@@ -1,0 +1,132 @@
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f8f9fa;
+	margin: 0;
+}
+
+/* Navigation Links */
+.links {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 20px;
+	padding: 15px 20px;
+	gap: 15px;
+	background-color: #dfe1e5;
+	box-shadow: 0 1px 10px #9f9f9f;
+}
+
+.links .logo {
+	font-size: 18px;
+	font-weight: bold;
+	color: #1a0dab;
+	margin-right: auto;
+}
+
+.links a {
+	text-decoration: none;
+	color: #1a0dab;
+	transition: color 0.3s;
+	font-size: 16px;
+}
+
+.links a:hover {
+	color: #d93025;
+}
+
+/* Search Box */
+.search-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 50px;
+}
+
+.search-bar {
+	width: 100%;
+	max-width: 500px;
+	height: 40px;
+	border-radius: 20px;
+	border: 1px solid #dfe1e5;
+	padding: 0 16px;
+	font-size: 16px;
+	box-shadow: 0 1px 6px #bcbcbe;
+	outline: none;
+}
+
+.search-bar:focus {
+	border-color: #4285f4;
+	box-shadow: 0 1px 8px #9dbff7;
+}
+
+/* Buttons */
+.buttons {
+	justify-content: center;
+	display: flex;
+	margin-top: 15px;
+	gap: 15px;
+}
+
+input[type="submit"] {
+	height: 40px;
+	border-radius: 20px;
+	border: none;
+	background-color: #4285f4;
+	color: white;
+	font-size: 15px;
+	cursor: pointer;
+	padding: 10px 20px;
+	box-shadow: 0 1px 10px blue;
+}
+
+input[type="submit"]:hover {
+	background-color: #357ae8;
+}
+
+/* Advanced Search */
+.advanced-search-container {
+	max-width: 700px;
+	margin: 30px auto;
+	padding: 20px;
+	border: 1px solid #e0e0e0;
+	border-radius: 5px;
+	background-color: white;
+	box-shadow: 0px 4px 6px #dedfe0;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.row label {
+	flex: 0 0 280px;
+	text-align: left;
+	margin-right: 10px;
+	font-size: 14px;
+
+}
+
+.row input[type="text"] {
+	flex: 1;
+	padding: 5px;
+	border: 1px solid #cccccc;
+	border-radius: 4px;
+}
+
+.advanced-button {
+	background-color: #4285f4;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 15px;
+	font-size: 14px;
+	display: block;
+	margin: 20px auto 0;
+	max-width: 200px;
+	cursor: pointer;
+}
+
+.advanced-button:hover {
+	background-color: #357ae8;
+}
