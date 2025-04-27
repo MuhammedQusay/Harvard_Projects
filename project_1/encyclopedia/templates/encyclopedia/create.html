@@ -1,0 +1,25 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create
+{% endblock %}
+
+{% block body %}
+    <h1>Create a new page</h1>
+    <form action="{% url "create" %}" method=POST>
+        {% csrf_token %}
+        <label for="title">Title:</label>
+        <br>
+        <input type="text" id="title" name="title" placeholder="Name of the new entry" value="{{title}}" required autofocus>
+        <br>
+        {% if error %}
+            <p class="error">{{error}}</p>
+        {% endif %}
+        <label for="content">Content in <a href="{% url "entry" "Markdown" %}">Markdown</a>:</label>
+        <br>
+        <textarea id="content" name="content" placeholder="Content of the new entry" required>{{content}}</textarea>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Create page">
+    </form>
+
+{% endblock %}

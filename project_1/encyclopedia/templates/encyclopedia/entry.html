@@ -1,0 +1,22 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{entry}}
+{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <h1 class="error ">{{error}}</h1>
+        <p>Do you want to <a href="{% url "create" %}">create a new title</a>?</p>
+
+    {% else %}
+        {{content|safe}}
+
+
+        <form action="{% url 'edit' entry %}" method=GET>
+            <button class="btn btn-primary" type="submit">Edit</button>
+        </form>
+    {% endif %}
+
+{% endblock %}
+
