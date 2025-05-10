@@ -1,0 +1,39 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    Display by Category
+{% endblock title %}
+
+{% block body %}
+    <h2>Display by Category</h2>
+
+    <form action="{% url "display_by_category" %}" method=POST>
+        {% csrf_token %}
+        <select name="category" id="category" class="form-control" required onchange="this.form.submit();">
+            <option value="" selected disabled>Select Category</option>
+            {% for value, display in category_choices %}
+                <option value="{{ value }}">{{ display }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <div class="card-list">
+        {% for auction in auctions %}
+            <a href="{% url 'show_auction' auction.id %}" class="_card-link">
+                <div class="_card">
+                    {% if auction.img %}
+                        <img class="left-img" src="{{auction.img.url}}" alt="" >
+                    {% else %}
+                        <img class="left-img" src="/media/default.png" alt="" >
+                    {% endif %}
+                    <div class="_card-info">
+                        <h2>{{ auction.title }}</h2>
+                        <div class="_category">{{ auction.get_category_display }}</div>
+                        <p>{{ auction.description }}</p>
+                        <p><strong>Current Bid:</strong> ${{ auction.current_bid }}</p>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
