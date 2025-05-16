@@ -1,0 +1,251 @@
+body {
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+}
+
+._card {
+    display: flex;
+    align-items: flex-start;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 5px 5px 20px 0px #bbb;
+    margin: 2vw 3vw;
+    width: 94vw;
+    overflow: hidden;
+    position: relative;
+    flex-direction: row;
+}
+
+._card img {
+    height: auto; /* keep aspect ratio */
+    min-height: 220px;
+    display: block; /* remove inline gap */
+    max-height: 250px;
+    border: 2px solid turquoise;
+    border-radius: 15px;
+}
+
+._card-info {
+    flex: 1;
+    padding: 10px 24px 24px 20px;
+    box-sizing: border-box;
+}
+
+._card-info .user {
+    opacity: .5;
+}
+
+.top-right-btn {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    padding: 8px 18px;
+    background-color: #1abc9c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s, box-shadow 0.2s;
+    z-index: 1;
+}
+
+.top-right-btn:hover,
+.top-right-btn:focus {
+    background-color: #16a085;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    color: inherit;
+    text-decoration: none;
+}
+
+._category {
+    background-color: rgb(156, 255, 180);
+    border: 1px solid rgb(139, 252, 139);
+    border-radius: 20px;
+    width: fit-content;
+    padding: 0px 8px 4px 8px;
+    margin-bottom: 12px;
+    font-size: 0.95em;
+}
+
+._card-link {
+    text-decoration: none !important;
+    color: inherit;
+    display: block;
+}
+
+._card-link:hover,
+._card-link:focus {
+    color: inherit;
+}
+
+/* --- Auction page: comments below card --- */
+._card-auction {
+    padding: 1vw;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    /* Make the card taller for comments */
+}
+
+._card-auction-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+._card-auction img {
+    border-radius: 15px;
+    /* Same as index for consistency */
+}
+
+.card-comments {
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+    background: #f9f9f9;
+    border-top: 1px solid #eee;
+    margin-top: 0;
+}
+
+.card-comments h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.comment {
+    border: 1px solid #b3e0ff;
+    background: #eafaff;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comment-user {
+    font-weight: bold;
+}
+
+.comment-date {
+    opacity: 0.5;
+    font-size: 0.9em;
+}
+.card-comments form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+    align-items: center;
+}
+
+.card-comments input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #b3e0ff;
+    border-radius: 5px;
+    font-size: 1em;
+    outline: none;
+    transition: border 0.2s;
+    background: #fff;
+}
+
+.card-comments input:focus {
+    border-color: turquoise;
+}
+
+.card-comments button {
+    padding: 8px 18px;
+    background-color: turquoise;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card-comments button:hover {
+    background-color: #1abc9c;
+}
+
+/* --- New Bid Form Styling --- */
+._card-info form {
+    display: flex;
+    gap: 10px;
+    margin: 18px 0;
+    align-items: center;
+}
+
+._card-info input[type="number"] {
+    padding: 8px 12px;
+    border: 1.5px solid #b3e0ff;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 120px;
+    background: #fff;
+    transition: border 0.2s;
+}
+
+._card-info input[type="number"]:focus {
+    border-color: turquoise;
+    outline: none;
+}
+
+._card-info button[type="submit"] {
+    padding: 8px 18px;
+    background-color: turquoise;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+._card-info button[type="submit"]:hover {
+    background-color: #1abc9c;
+}
+
+/* --- Watchlist Button Styling --- */
+._card-info a.watchlist-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 18px;
+    background-color: #f39c12;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 1em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+._card-info a.watchlist-btn:hover,
+._card-info a.watchlist-btn:focus {
+    background-color: #e67e22;
+}
+
+.auction-closed-banner {
+    background-color: #ffdddd;
+    border: 2px solid #ff4d4d;
+    color: #a70000;
+    padding: 16px 24px;
+    border-radius: 10px;
+    max-width: 900px;
+    margin: 16px auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.4em;
+    box-shadow: 0px 2px 8px rgba(255, 77, 77, 0.3);
+    user-select: none;
+}

@@ -1,0 +1,67 @@
+{% extends "auctions/layout.html" %}
+
+{% block Title %}
+    {{ auction.title }}
+{% endblock Title %}
+
+{% block body %}
+    {% if error %}
+        <div class="auction-closed-banner">
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+
+    {% if auction %}
+        {% if not auction.is_active %}
+            <div class="auction-closed-banner">
+                <p>❌ Auction is closed!</p>
+                <p>Winner is <strong>{{ auction.current_bid.user }}</strong></p>
+            </div>
+        {% endif %}
+
+        <div class="_card _card-auction">
+            <img src="{{ auction.img }}" alt="{{ auction.title}}">
+            <div class="_card-info">
+                {% if user == auction.user and auction.is_active %}
+                    <a class="top-right-btn" id="close-auction" href="{% url 'close_auction' auction.id %}">Close Auction</a>
+                {% endif %}
+                <p class="user">Created by: {{auction.user}}</p>
+                <h2>{{ auction.title }}</h2>
+                <div class="_category">{{ auction.get_category_display }}</div>
+                <p>{{ auction.description }}</p>
+                <p><strong>Current Bid: ${{ auction.current_bid.bid_amount }}</strong> by {{ auction.current_bid.user }}</p>
+                <form action="{% url 'show_auction' auction.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="number" name="new_bid" required>
+                    <button type="submit">Place a new bid</button>
+                </form>
+                {% if request.user in auction.watchlist.all %}
+                    <a href="{% url 'remove_from_watchlist' auction.id %}" class="watchlist-btn">Remove from Watchlist</a>
+                {% else %}
+                    <a href="{% url 'add_to_watchlist' auction.id %}" class="watchlist-btn">Add to Watchlist</a>
+                {% endif %}
+            <!-- Add more auction details/buttons here if needed -->
+            </div>
+            <div class="card-comments">
+                <form action="{% url 'comment' auction.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="text" id="text" placeholder="Type your comment..." required>
+                    <button type="submit">Post</button>
+                </form>
+
+                <h3>Comments</h3>
+                {% for comment in comments %}
+                    <div class="comment">
+                        <div class="comment-header">
+                            <p class="comment-user">{{ comment.user }}</p>
+                            <p class="comment-date">{{ comment.date }}</p>
+                        </div>
+                        <div class="comment-text">{{ comment.text }}</div>
+                    </div>
+                {% empty %}
+                    <p>No comments yet. Want to start a conversation?</p>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock body %}
