@@ -1,0 +1,39 @@
+textarea {
+    min-height: 400px;
+}
+
+.email-strip{
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+}
+
+.sender{
+    font-weight: 600;
+}
+
+.subject {
+    flex: 1;
+    color: gray;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 12px;
+    white-space: nowrap;
+}
+
+.timestamp {
+    flex: 0 0 90px;
+    text-align: right;
+    color: gray;
+    font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+#read {
+    background: rgb(207, 207, 207);
+}
+#unread {
+    background: white;
+}
