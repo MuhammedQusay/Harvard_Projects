@@ -1,0 +1,97 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+  <div class="card" data-post-id="{{ post.id }}">
+    <div class="pp_username" style="align-items: center;">
+      <img src="{{ post.poster.profile_picture }}" alt="Profile Picture">
+      <p style="margin-bottom: 0; display: flex; align-items: center; gap: 0.5rem;">
+        <strong><a href="{% url 'profile' post.poster.id %}">{{ post.poster }}</a></strong>
+        <span class="post-date">{{ post.timestamp }}</span>
+      </p>
+    </div>
+
+    <div class="post-content">
+        <pre>{{ post.content }}</pre>
+    </div>
+
+    <div class="post-actions">
+      <button class="like-btn btn btn-outline-primary" title="Like">
+        {% if user.is_authenticated and user in post.likes.all %}
+          ❤️ <span class="likes-count">{{ post.likes.count }}</span>
+        {% else %}
+          🤍 <span class="likes-count">{{ post.likes.count }}</span>
+        {% endif %}
+      </button>
+
+      <button class="share-btn btn btn-outline-info" title="Share">
+        <span class="icon">🔗</span> Share
+      </button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.like-btn').forEach(button => {
+        button.addEventListener('click', () => {
+          const card = button.closest('.card');
+          const postId = card.getAttribute('data-post-id');
+          fetch(`/like/${postId}/`, {
+            method: 'POST'
+          }).then(response => {
+            if (response.redirected) {
+              window.location.href = response.url;
+              return null;
+            } else {
+              return response.json()
+            }
+          })
+            .then(data => {
+              const likesCountElem = card.querySelector('.likes-count');
+              likesCountElem.textContent = data.likes_count;
+              button.innerHTML = (data.liked ? '❤️' : '🤍') + ' <span class="likes-count">' + data.likes_count + '</span>';
+            });
+        });
+      });
+
+      document.querySelectorAll('.share-btn').forEach(button => {
+        button.addEventListener('click', () => {
+          const card = button.closest('.card');
+          const postId = card.getAttribute('data-post-id');
+          const url = window.location.origin + '/post/' + postId + '/';
+          navigator.clipboard.writeText(url).then(() => {
+            alert('Post URL copied to clipboard!');
+          }).catch(() => {
+            alert('Failed to copy to clipboard');
+          });
+        });
+      });
+    });
+  </script>
+
+  <form method="POST" action="{% url 'post_detail' post.id %}" style="margin: 1rem;">
+    {% csrf_token %}
+    <textarea name="comment_text" rows="4" class="form-control" placeholder="Write your comment here..." required></textarea>
+    <button type="submit" class="btn btn-primary mt-2">Add Comment</button>
+  </form>
+
+  <hr>
+
+  <div class="comments">
+    <h3>Comments ({{ post.comments.count }})</h3>
+    {% for comment in comments.reverse %}
+
+      <div class="card">
+        <div class="pp_username" style="align-items: center;">
+          <img src="{{ comment.commenter.profile_picture }}" alt="Profile Picture">
+          <p style="margin-bottom: 0; display: flex; align-items: center; gap: 0.5rem;">
+            <strong><a href="{% url 'profile' comment.commenter.id %}">{{ comment.commenter }}</a></strong>
+            <span class="post-date">{{ comment.timestamp }}</span>
+          </p>
+        </div>
+        <pre style="margin-left: 4rem;">{{ comment.text }}</pre>
+      </div>
+    {% empty %}
+      <p>No comments yet. Be the first to comment!</p>
+    {% endfor %}
+  </div>
+{% endblock %}
